@@ -1,0 +1,9 @@
+Axlsx::Package.new do |p|
+  p.workbook.add_worksheet(:name => "Widgets") do |sheet|
+    sheet.add_row %w{ Name Description }
+    @widgets.each do |widget|
+      sheet.add_row [widget.name, widget.description]
+    end
+  end
+  return p.to_stream.string
+end
