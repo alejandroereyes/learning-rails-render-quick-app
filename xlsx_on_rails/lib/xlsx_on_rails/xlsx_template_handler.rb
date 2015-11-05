@@ -11,3 +11,5 @@ module XlsxOnRails
     end
   end
 end
+
+ActionView::Template.register_template_handler :axlsx, XlsxOnRails::TemplateHandler

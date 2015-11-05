@@ -12,4 +12,8 @@ class XlsxTemplateHandlerTest < ActiveSupport::TestCase
     assert XlsxOnRails::TemplateHandler.respond_to?(:call)
     assert_equal Mime::XLSX, XlsxOnRails::TemplateHandler.new.default_format
   end
+
+  test 'handler is registered' do
+    assert ActionView::Template.template_handler_extensions.include?('axlsx')
+  end
 end
