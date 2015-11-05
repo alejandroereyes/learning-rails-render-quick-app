@@ -1,0 +1,2 @@
+module XlsxOnRails
+end
