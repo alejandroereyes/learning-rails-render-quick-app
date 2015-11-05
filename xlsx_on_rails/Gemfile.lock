@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     xlsx_on_rails (0.0.1)
+      axlsx (>= 2.0.1)
       rails (~> 3.2.22)
 
 GEM
@@ -35,9 +36,14 @@ GEM
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     arel (3.0.3)
+    axlsx (2.0.1)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.0.0)
     builder (3.0.4)
     erubis (2.7.0)
     hike (1.2.3)
+    htmlentities (4.3.4)
     i18n (0.7.0)
     journey (1.0.4)
     jquery-rails (3.1.4)
@@ -48,7 +54,10 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mini_portile (0.6.2)
     multi_json (1.11.2)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
     polyglot (0.3.5)
     rack (1.4.7)
     rack-cache (1.5.1)
@@ -75,6 +84,14 @@ GEM
     rake (10.4.2)
     rdoc (3.12.2)
       json (~> 1.4)
+    roo (1.13.2)
+      nokogiri
+      rubyzip
+      spreadsheet (> 0.6.4)
+    ruby-ole (1.2.11.8)
+    rubyzip (1.0.0)
+    spreadsheet (1.0.8)
+      ruby-ole (>= 1.0)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -93,6 +110,7 @@ PLATFORMS
 
 DEPENDENCIES
   jquery-rails
+  roo
   sqlite3
   xlsx_on_rails!
 
