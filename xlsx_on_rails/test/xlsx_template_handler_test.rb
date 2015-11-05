@@ -6,5 +6,10 @@ class XlsxTemplateHandlerTest < ActiveSupport::TestCase
     assert_equal Mime::XLSX.to_sym, :xlsx
     assert_equal Mime::XLSX.to_s, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
   end
+
+  test 'handler exists' do
+    assert XlsxOnRails.const_defined?('TemplateHandler')
+    assert XlsxOnRails::TemplateHandler.respond_to?(:call)
+    assert_equal Mime::XLSX, XlsxOnRails::TemplateHandler.new.default_format
+  end
 end
-  
