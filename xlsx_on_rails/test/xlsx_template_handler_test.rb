@@ -16,4 +16,24 @@ class XlsxTemplateHandlerTest < ActiveSupport::TestCase
   test 'handler is registered' do
     assert ActionView::Template.template_handler_extensions.include?('axlsx')
   end
+
+  test 'compiles a spreadsheet' do
+    VT = Struct.new(:source)
+    template = VT.new(
+                      "xlsx_package = Axlsx::Package.new
+                      wb = xlsx_package.workbook
+                      wb.add_worksheet(name: 'Test') do |sheet|
+                        sheet.add_row ['one', 'two', 'three']
+                        sheet.add_row ['a', 'b', 'c']
+                      end
+                      xlsx_package.to_stream.string
+                      ")
+    content = eval(XlsxOnRails::TemplateHandler.call template)
+    File.open('/tmp/xlsx_on_rails.xlsx', 'w') { |f| f.puts content }
+    wb = nil
+    assert_nothing_raised do
+      wb = Roo::Excelx.new('/tmp/xlsx_on_rails.xlsx')
+    end
+    assert_equal 'b', wb.cell(2,2), 'template compiles'
+  end
 end
