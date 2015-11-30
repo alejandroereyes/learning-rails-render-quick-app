@@ -3,7 +3,9 @@ Mime::Type.register "application/vnd.openxmlformats-officedocument.spreadsheetml
 module XlsxOnRails
   class TemplateHandler
     def self.call(template)
-      template.source
+      "xlsx_package = Axlsx::Package.new\n" +
+      template.source +
+      "\nxlsx_package.to_stream.string"
     end
 
     def default_format
