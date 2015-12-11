@@ -7,6 +7,7 @@ class WidgetsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @widgets }
+      format.xlsx
     end
   end
 

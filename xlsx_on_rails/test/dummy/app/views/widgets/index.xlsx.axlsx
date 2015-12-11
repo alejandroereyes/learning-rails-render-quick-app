@@ -1,0 +1,6 @@
+xlsx_package.workbook.add_worksheet(:name => "Widgets") do |sheet|
+  sheet.add_row %w{Name Description}
+  @widgets.each do |widget|
+    sheet.add_row [widget.name, widget.description]
+  end
+end

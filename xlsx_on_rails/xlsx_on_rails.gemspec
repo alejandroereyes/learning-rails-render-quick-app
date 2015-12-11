@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
   s.add_dependency "axlsx", ">= 2.0.1"
 
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "roo"
+  s.add_development_dependency "roo"#, "~> 2.1.0"
   s.add_development_dependency 'test-unit'
 end
