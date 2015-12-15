@@ -1,4 +1,6 @@
 Dummy::Application.routes.draw do
+  get 'widgets/xlsx' => 'widgets#xlsx'
+  get 'widgets/with' => 'widgets#with'
   resources :widgets
 
 

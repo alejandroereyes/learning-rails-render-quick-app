@@ -4,8 +4,8 @@ module XlsxOnRails
   class TemplateHandler
     def self.call(template)
       "xlsx_package = Axlsx::Package.new\n" +
-      template.source +
-      "\nxlsx_package.to_stream.string"
+        template.source +
+        "\nxlsx_package.to_stream.string"
     end
 
     def default_format
