@@ -23,4 +23,4 @@ end
 
 content = av.render template: 'widgets/index.xlsx.axlsx'
 File.open("/tmp/with_runner.xlsx","w+b") {|f| f.puts content }
-# `open /tmp/with_runner.xlsx`
+  `open /tmp/with_runner.xlsx`
