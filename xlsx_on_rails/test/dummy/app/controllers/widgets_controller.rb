@@ -1,6 +1,6 @@
 class WidgetsController < ApplicationController
   before_action :set_widget, only: [:show, :edit, :update, :destroy]
-  respond_to :html, :xlsx, :json
+  respond_to :html, :xlsx
 
   # GET /widgets
   def index
@@ -12,7 +12,7 @@ class WidgetsController < ApplicationController
       render 'index', formats: [:xlsx] #always xlsx
     when 'render_xlsx'
       render xlsx: @widgets
-      render json: @widgets
+      # render json: @widgets
     when 'respond_with'
       respond_with @widgets
     when 'with_filename'

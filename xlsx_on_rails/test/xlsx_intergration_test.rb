@@ -25,16 +25,18 @@ class XlsxIntegrationTest < ActionDispatch::IntegrationTest
     assert_spreadsheet response.body, 'index.xlsx body'
   end
 
-  # test "renders with render :xlsx" do
-  #   get widgets_path(render: :render_xlsx)
-  #   assert_xlsx_header 'index.xlsx header'
-  #   assert_spreadsheet response.body, 'index.xlsx body'
-  # end
+  test "renders with render :xlsx" do
+    get widgets_path(render: :render_xlsx)
+    assert_equal "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", headers["Content-Type"], 'with_filename'
+    assert_equal 'binary', headers["Content-Transfer-Encoding"]
+    assert_spreadsheet response.body, 'index.xlsx body', 'Name 0'
+  end
 
   test "renders with respond_with" do
-    get widgets_path(format: :xlsx, render: :respond_with)
-    assert_xlsx_header 'index.xlsx header'
-    assert_spreadsheet response.body, 'index.xlsx body'
+    get '/widgets/with.xlsx'
+    assert_equal "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", headers["Content-Type"], 'with_filename'
+    assert_equal 'binary', headers["Content-Transfer-Encoding"]
+    assert_spreadsheet response.body, 'index.xlsx body', 'Name 0'
   end
 
   test "sets the filename header" do
