@@ -1,84 +1,87 @@
 class WidgetsController < ApplicationController
+  before_action :set_widget, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :xlsx, :json
+
   # GET /widgets
-  # GET /widgets.json
   def index
     @widgets = Widget.all
+    case params[:render]
+    when 'with_extension'
+      render 'index.xlsx.axlsx' #always xlsx
+    when 'with_format'
+      render 'index', formats: [:xlsx] #always xlsx
+    when 'render_xlsx'
+      render xlsx: @widgets
+      render json: @widgets
+    when 'respond_with'
+      respond_with @widgets
+    when 'with_filename'
+      # response.headers['Content-Disposition'] =
+        # 'attachment; filename="with_filename.xlsx"'
+      # send_data render_to_string, :filename => 'with_filename.xlsx', :type => Mime::XLSX, :disposition => 'attachment'
+      render xlsx: 'with_filename'
+    else
+      # default_render
+    end
+  end
 
-    # respond_to do |format|
-    #   format.html # index.html.erb
-    #   format.json { render json: @widgets }
-    #   format.xlsx
-    # end
+  def with
+    @widgets = Widget.all
+    respond_with @widgets
+  end
+
+  def xlsx
+    WidgetMailer.to_xlsx(Widget.all).deliver
+    render json: true
   end
 
   # GET /widgets/1
-  # GET /widgets/1.json
   def show
-    @widget = Widget.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @widget }
-    end
   end
 
   # GET /widgets/new
-  # GET /widgets/new.json
   def new
     @widget = Widget.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @widget }
-    end
   end
 
   # GET /widgets/1/edit
   def edit
-    @widget = Widget.find(params[:id])
   end
 
   # POST /widgets
-  # POST /widgets.json
   def create
-    @widget = Widget.new(params[:widget])
+    @widget = Widget.new(widget_params)
 
-    respond_to do |format|
-      if @widget.save
-        format.html { redirect_to @widget, notice: 'Widget was successfully created.' }
-        format.json { render json: @widget, status: :created, location: @widget }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @widget.errors, status: :unprocessable_entity }
-      end
+    if @widget.save
+      redirect_to @widget, notice: 'Widget was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PUT /widgets/1
-  # PUT /widgets/1.json
+  # PATCH/PUT /widgets/1
   def update
-    @widget = Widget.find(params[:id])
-
-    respond_to do |format|
-      if @widget.update_attributes(params[:widget])
-        format.html { redirect_to @widget, notice: 'Widget was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @widget.errors, status: :unprocessable_entity }
-      end
+    if @widget.update(widget_params)
+      redirect_to @widget, notice: 'Widget was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /widgets/1
-  # DELETE /widgets/1.json
   def destroy
-    @widget = Widget.find(params[:id])
     @widget.destroy
-
-    respond_to do |format|
-      format.html { redirect_to widgets_url }
-      format.json { head :no_content }
-    end
+    redirect_to widgets_url, notice: 'Widget was successfully destroyed.'
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_widget
+      @widget = Widget.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def widget_params
+      params.require(:widget).permit(:name, :description)
+    end
 end

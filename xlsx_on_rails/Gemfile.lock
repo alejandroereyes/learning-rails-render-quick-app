@@ -3,6 +3,7 @@ PATH
   specs:
     xlsx_on_rails (0.0.1)
       axlsx (>= 2.0.1)
+      pry
       rails (~> 4.1.1)
 
 GEM
@@ -40,6 +41,7 @@ GEM
       nokogiri (>= 1.4.1)
       rubyzip (~> 1.0.0)
     builder (3.2.2)
+    coderay (1.1.0)
     concurrent-ruby (1.0.0)
     erubis (2.7.0)
     htmlentities (4.3.4)
@@ -50,11 +52,16 @@ GEM
     json (1.8.3)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    method_source (0.8.2)
     mime-types (2.99)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -80,6 +87,7 @@ GEM
       spreadsheet (> 0.6.4)
     ruby-ole (1.2.11.8)
     rubyzip (1.0.0)
+    slop (3.6.0)
     spreadsheet (1.1.0)
       ruby-ole (>= 1.0)
     sprockets (3.5.2)
@@ -100,9 +108,10 @@ PLATFORMS
 
 DEPENDENCIES
   jquery-rails
+  pry
   roo
   sqlite3
   xlsx_on_rails!
 
 BUNDLED WITH
-   1.10.6
+   1.11.1
