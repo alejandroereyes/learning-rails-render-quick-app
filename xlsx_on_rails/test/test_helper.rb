@@ -11,6 +11,10 @@ Rails.backtrace_cleaner.remove_silencers!
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
+if Widget.all.count > 0
+  Widget.all.delete_all
+end
+
 5.times { |i| Widget.create(name: "Name #{i}", description: "Description #{i}") }
 
 # Load fixtures from the engine
