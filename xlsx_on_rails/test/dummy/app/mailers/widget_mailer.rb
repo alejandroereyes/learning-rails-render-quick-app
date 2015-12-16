@@ -9,8 +9,10 @@ class WidgetMailer < ActionMailer::Base
   def to_xlsx(widgets)
     @greeting = "Hi"
 
-    @widgets = widgets
-    xlsx = render_to_string 'widgets/index.xlsx.axlsx'
+    # @widgets = widgets
+    # xlsx = render_to_string 'widgets/index.xlsx.axlsx'
+    xlsx = widgets.to_xlsx
+
     attachments["widgets.xlsx"] = {mime_type: Mime::XLSX, content: xlsx}
 
     mail to: "to@example.org"

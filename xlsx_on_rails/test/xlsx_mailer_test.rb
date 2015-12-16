@@ -9,6 +9,6 @@ class XlsxMailerTest < ActionMailer::TestCase
     assert_match "Hi", mail.body.encoded
     assert 1, mail.attachments.length
     assert_equal Mime::XLSX.to_s+'; charset=UTF-8', mail.attachments.first.content_type
-    assert_spreadsheet mail.attachments.first.body, 'attachment body'#, 'Name 0'
+    assert_spreadsheet mail.attachments.first.body, 'attachment body', 'Name 0'
   end
 end

@@ -46,16 +46,16 @@ class XlsxIntegrationTest < ActionDispatch::IntegrationTest
     # assert_xlsx_header 'with_filename'
     assert_equal "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", headers["Content-Type"], 'with_filename'
   end
-  #
-  # test "emails template" do
-  #   get '/widgets/xlsx'
-  #   mail = ActionMailer::Base.deliveries.last
-  #   assert_equal "To xlsx", mail.subject
-  #   assert_equal ["to@example.org"], mail.to
-  #   assert_equal ["from@example.com"], mail.from
-  #   assert_match "Hi", mail.body.encoded
-  #   assert 1, mail.attachments.length
-  #   assert_equal Mime::XLSX.to_s+'; charset=UTF-8', mail.attachments.first.content_type
-  #   assert_spreadsheet mail.attachments.first.body, 'attachment body', 'Name 0'
-  # end
+
+  test "emails template" do
+    get '/widgets/xlsx'
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal "To xlsx", mail.subject
+    assert_equal ["to@example.org"], mail.to
+    assert_equal ["from@example.com"], mail.from
+    assert_match "Hi", mail.body.encoded
+    assert 1, mail.attachments.length
+    assert_equal Mime::XLSX.to_s+'; charset=UTF-8', mail.attachments.first.content_type
+    assert_spreadsheet mail.attachments.first.body, 'attachment body', 'Name 0'
+  end
 end
