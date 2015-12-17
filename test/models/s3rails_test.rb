@@ -31,31 +31,31 @@ class S3RailsTest < ActiveSupport::TestCase
     assert_equal [nil], template.variants
     assert_equal 1406666054, template.updated_at.to_i
   end
-  #
-  # test "reload S3rails cache" do
-  #   # last load time
-  #   last_load = @s3rails.last_load
-  #
-  #   # find widgets/index
-  #   details = {locale:[], formats:[:html], variants:[], handlers:[:erb]}
-  #   template = @resolver.find_all("index", "widgets", false, details).first
-  #   assert_match "<h1>Listing widgets</h1>", template.source
-  #
-  #   # simulate template change by changing bucktes
-  #   first_objects = @s3rails.objects
-  #   @s3rails.bucket = @s3rails.buckets['app-widgets2']
-  #   require 'fileutils'
-  #   FileUtils.touch 'tmp/reload_s3.txt', mtime: Time.now + 1.seconds
-  #
-  #   # find widgets/index again
-  #   template = @resolver.find_all("index", "widgets", false, details).first
-  #   assert_match "<h1>Listing widgets 2</h1>", template.source
-  #
-  #   # different?
-  #   assert_not_equal last_load, @s3rails.last_load
-  #
-  #   # reset to original conditions
-  #   @s3rails.bucket = @s3rails.buckets['app-widgets']
-  #   @s3rails.objects = first_objects
-  # end
+
+  test "reload S3rails cache" do
+    # last load time
+    last_load = @s3rails.last_load
+
+    # find widgets/index
+    details = {locale:[], formats:[:html], variants:[], handlers:[:erb]}
+    template = @resolver.find_all("index", "widgets", false, details).first
+    assert_match "<h1>Listing widgets</h1>", template.source
+
+    # simulate template change by changing bucktes
+    first_objects = @s3rails.objects
+    @s3rails.bucket = @s3rails.buckets['app-widgets2']
+    require 'fileutils'
+    FileUtils.touch 'tmp/reload_s3.txt', mtime: Time.now + 1.seconds
+
+    # find widgets/index again
+    template = @resolver.find_all("index", "widgets", false, details).first
+    assert_match "<h1>Listing widgets 2</h1>", template.source
+
+    # different?
+    assert_not_equal last_load, @s3rails.last_load
+
+    # reset to original conditions
+    @s3rails.bucket = @s3rails.buckets['app-widgets']
+    @s3rails.objects = first_objects
+  end
 end

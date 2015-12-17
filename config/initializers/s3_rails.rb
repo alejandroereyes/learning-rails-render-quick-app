@@ -64,9 +64,9 @@ class S3Resolver < ActionView::PathResolver
       clear_cache
     end
 
-    objects = @s3rails.bucket.objects.with_prefix(path.prefix).select do |obj|
-      File.fnmatch query, obj.key, File::FNM_EXTGLOB
-    end
+    # objects = @s3rails.bucket.objects.with_prefix(path.prefix).select do |obj|
+    #   File.fnmatch query, obj.key, File::FNM_EXTGLOB
+    # end
 
     objects = @s3rails.objects.select do |key, obj|
       File.fnmatch query, key, File::FNM_EXTGLOB
