@@ -1,6 +1,6 @@
 class WidgetsController < ApplicationController
   before_action :set_widget, only: [:show, :edit, :update, :destroy]
-  append_view_path S3Resolver.new
+  append_view_path S3Resolver.instance
 
   # GET /widgets
   # GET /widgets.json
