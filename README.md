@@ -31,12 +31,12 @@ def find_all(name, prefix=nil, partial=false, details={}, key=nil, locals=[])
 #####`ActionView::Template` - Wraps the template source
   - To instantiate a Template
 
-  ```ruby
-  # contents = binary of a file path, template = is that file, handler is extracted from that template
-  Template.new(contents, File.expand_path(template), handler,
-    :virtual_path => path.virtual, # need for internationalization, in a view you can use the shortcut ex: <%= t('.title') %> and virtual path(widgets/index) will be used to look in config/locales/en.yml to find en: \n widgets: \n index: \n title: "English Widgets"
-    :format       => format,
-    :variant      => variant,
-    :updated_at   => mtime(template)
-    )
-  ```
+```ruby
+# contents = binary of a file path, template = is that file, handler is extracted from that template
+Template.new(contents, File.expand_path(template), handler,
+  :virtual_path => path.virtual, # need for internationalization, in a view you can use the shortcut ex: <%= t('.title') %> and virtual path(widgets/index) will be used to look in config/locales/en.yml to find en: \n widgets: \n index: \n title: "English Widgets"
+  :format       => format,
+  :variant      => variant,
+  :updated_at   => mtime(template)
+  )
+```
