@@ -1,5 +1,0 @@
-s3_rails:
-  access_key_id: YOUR_ACCESS_KEY_ID
-  secret_access_key: YOUR_SECRET_ACCESS_KEY
-  bucket: 'app-widgets'
-  region: YOUR REGION
