@@ -13,24 +13,24 @@ class S3RailsTest < ActiveSupport::TestCase
     assert_equal 9, bucket_size, 'bucket_size'
   end
 
-  # test "resolver returns a template body" do
-  #   details = {
-  #     locale:[],
-  #     formats:[:html],
-  #     variants:[],
-  #     handlers:[:erb]
-  #   }
-  #
-  #   template = @resolver.find_all("index", "widgets", false, details).first
-  #   assert_kind_of ActionView::Template, template, 'ActionView::Template'
-  #
-  #   assert_equal 's3/app-widgets/widgets/index.html.erb', template.identifier, 'identifier'
-  #   assert_kind_of ActionView::Template::Handlers::ERB, template.handler, 'handler'
-  #   assert_equal 'widgets/index', template.virtual_path, 'virtual_path'
-  #   assert_equal [:html], template.formats, 'formats'
-  #   assert_equal [nil], template.variants
-  #   assert_equal 1406666054, template.updated_at.to_i
-  # end
+  test "resolver returns a template body" do
+    details = {
+      locale:[],
+      formats:[:html],
+      variants:[],
+      handlers:[:erb]
+    }
+
+    template = @resolver.find_all("index", "widgets", false, details).first
+    assert_kind_of ActionView::Template, template, 'ActionView::Template'
+
+    assert_equal 's3/app-widgets/widgets/index.html.erb', template.identifier, 'identifier'
+    assert_kind_of ActionView::Template::Handlers::ERB, template.handler, 'handler'
+    assert_equal 'widgets/index', template.virtual_path, 'virtual_path'
+    assert_equal [:html], template.formats, 'formats'
+    assert_equal [nil], template.variants
+    assert_equal 1406666054, template.updated_at.to_i
+  end
   #
   # test "reload S3rails cache" do
   #   # last load time
