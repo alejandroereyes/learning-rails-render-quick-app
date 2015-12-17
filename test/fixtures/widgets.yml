@@ -1,9 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+zero:
+  name: Name 0
+  description: Description 0
+
 one:
-  name: MyString
-  description: MyString
+  name: Name 1
+  description: Description 1
 
 two:
-  name: MyString
-  description: MyString
+  name: Name 2
+  description: Description 2
+
+three:
+  name: Name 3
+  description: Description 3
+
+four:
+  name: Name 4
+  description: Description 4
