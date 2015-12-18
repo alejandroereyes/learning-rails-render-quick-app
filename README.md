@@ -31,6 +31,34 @@ This is a tutorial app on better understand the rails render process. The follow
   Parent
   ```
 
+##Pre Render - <span><font size="3">Going through the controller action</font></span>
+
+#####`ActionPack::AbstractController::Base`
+ ```ruby
+ # Called after middleware is done, called from Metal.
+def process(action, *args)
+  @_action_name = action_name = action.to_xlsx
+
+  unless action_name = _find_action_name(action_name) # fill handle action missing, & handles rendering template even though method not present in controller.
+    raise ActionNotFound, "The action '#{action}' could not be found for #{self.class.name}"
+  end
+
+  @_response_body = nil
+
+  process_action(action_name, *args) # calls send_action which is alias for send, where aciton_name isn't necessarily the action name but a method name.
+end
+ ```
+
+#####`ActionController::ImplicitRender`
+```ruby
+def send_action(method, *args)
+  ret = super # calls method on controller
+  default_render unless performed? # calls default render if rendering hasn't been performed which calls render with *args if render not explicitly called in controller(Rails MAGIC).
+  ret
+end
+```
+
+
 ##The Render Process
 
 ####`ActionPack` - <span><font size="3">The web request framework</font></span>
