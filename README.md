@@ -2,6 +2,35 @@
 
 This is a tutorial app on better understand the rails render process. The following are a few notes I took during the course.
 
+##Rails Inheritance
+- Included modules are ancestors
+- Methods are overridden in reverse
+- `super` can be used inside a method to call to the its first ancestor's method.
+- `class Parent` that includes `module Supportive`
+ ```ruby
+ puts Parent.ancestors
+ Parent
+ Supportive
+ Object
+ ```
+
+- `class Child < Parent` that includes `module Supportive`
+  ```ruby
+  puts Child.ancestors
+  Child
+  Supportive
+  Parent
+  ```
+
+- `class Child < Parent` that includes `module Supportive` and line below includes `module Detractive`
+  ```ruby
+  puts Child.ancestors
+  Child
+  Detractive
+  Supportive
+  Parent
+  ```
+
 ##The Render Process
 
 ####`ActionPack` - <span><font size="3">The web request framework</font></span>
@@ -12,15 +41,15 @@ This is a tutorial app on better understand the rails render process. The follow
 #####`AbstractController` - <span><font size="3">Shares all of its logic with ActionController & ActionMailer</font></span>
 
 
-#####`Metal` - <span><font size="3"></font></span>
+#####`Metal` - <span><font size="3">Bare bones Controller. Can be used to create a lightweight controller and only include the modules you want.</font></span>
 
 
-#####`ActionController` - <span><font size="3"></font></span>
+#####`ActionController` - <span><font size="3">The Base class that all Rails application controllers inherit from. It's where all the modules are included.</font></span>
 
 
 ##The Resolver Process
 
-####`ActionView` - <span><font size="3">Responsible for templates, helpers & rendering</font></span>
+####`ActionView` - <span><font size="3">Responsible for templates, helpers, resolvers rendering</font></span>
 
 #####`ActionView::TemplateRenderer` - <span><font size="3">Finds and rendering the template</font></span>
 
